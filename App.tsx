@@ -2,7 +2,7 @@ import './gesture-handler';
 
 import { NavigationContainer } from '@react-navigation/native';
 import { StyleSheet } from 'react-native';
-import Drawer from './navigation/Drawer';
+import Drawer from './src/navigation/Drawer';
 
 export default function App() {
   return (
