@@ -1,15 +1,21 @@
 import { DexPokemon } from "../config/entities/DexPokemon";
-import { PokemonData } from "../config/responses/PokemonData";
 import { HttpFetchPokemon } from "./http/HttpFetchPokemon";
 
 export class PokemonAdapter {
-    static async getThisPokemon(): Promise<DexPokemon> {
+    static async getThisPokemon(name: string): Promise<DexPokemon> {
         const httpFetchPokemon = new HttpFetchPokemon({
             url: "https://pokeapi.co/api/v2/pokemon",
-            pokemon: "bulbasaur",
+            pokemon: name,
         });
-        const pokemon = await httpFetchPokemon.getPokemon();
-        
-        return pokemon;
+
+        const rawData = await httpFetchPokemon.getPokemon();
+
+        const dexPokemon: DexPokemon = {
+            id: rawData.id,
+            name: rawData.name,
+            types: rawData.types.map((type) => type.type.name),
+        };
+
+        return dexPokemon;
     }
 }

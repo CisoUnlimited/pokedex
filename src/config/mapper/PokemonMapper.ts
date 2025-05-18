@@ -5,5 +5,6 @@ export const PokemonMapper = (item : PokemonData) : DexPokemon => {
     return {
         id: item.id,
         name: item.name,
+        types: item.types.map((type) => type.type.name),
     }
 }

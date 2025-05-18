@@ -1,15 +1,23 @@
 import React from 'react';
-import { Button, StyleSheet, TextInput, View } from 'react-native';
-import { SafeAreaView, SafeAreaProvider } from 'react-native-safe-area-context';
+import {
+    Keyboard,
+    StyleSheet,
+    TextInput,
+    View,
+    TouchableOpacity,
+} from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
+import { Ionicons } from '@expo/vector-icons';
 
 interface CustomSearchBarProps {
     onSearch?: (text: string) => void;
 }
 
-const CustomSearchBar:React.FC<CustomSearchBarProps> = ({onSearch}) => {
+const CustomSearchBar: React.FC<CustomSearchBarProps> = ({ onSearch }) => {
     const [text, setText] = React.useState("");
 
     const handleSearch = () => {
+        Keyboard.dismiss();
         if (onSearch) {
             onSearch(text.trim());
         }
@@ -22,18 +30,15 @@ const CustomSearchBar:React.FC<CustomSearchBarProps> = ({onSearch}) => {
                     style={styles.input}
                     onChangeText={setText}
                     value={text}
-                    placeholder="Nombre del Pokémon"
+                    placeholder="Nombre o ID del Pokémon"
                     keyboardType="default"
                     autoCapitalize="words"
+                    returnKeyType="search"
+                    onSubmitEditing={handleSearch}
                 />
-                <View style={styles.buttonContainer}>
-                    <Button
-                        onPress={handleSearch}
-                        title="Buscar"
-                        color="#007AFF"
-                        accessibilityLabel="Buscar Pokémon"
-                    />
-                </View>
+                <TouchableOpacity style={styles.iconButton} onPress={handleSearch} activeOpacity={0.7}>
+                    <Ionicons name="search" size={24} color="#007AFF" />
+                </TouchableOpacity>
             </View>
         </SafeAreaView>
     );
@@ -46,19 +51,30 @@ const styles = StyleSheet.create({
         padding: 16,
     },
     searchContainer: {
-        alignItems: 'stretch',
+        flexDirection: 'row',
+        alignItems: 'center',
     },
     input: {
-        height: 40,
+        flex: 1,
+        height: 60,
         borderColor: '#ccc',
         borderWidth: 1,
-        borderRadius: 8,
+        borderTopLeftRadius: 8,
+        borderBottomLeftRadius: 8,
         paddingHorizontal: 10,
-        marginBottom: 12,
+        fontSize: 20,
     },
-    buttonContainer: {
-        borderRadius: 8,
-        overflow: 'hidden',
+    iconButton: {
+        height: 60,
+        width: 60,
+        backgroundColor: '#e6f0ff',
+        borderTopRightRadius: 8,
+        borderBottomRightRadius: 8,
+        justifyContent: 'center',
+        alignItems: 'center',
+        borderWidth: 1,
+        borderColor: '#ccc',
+        borderLeftWidth: 0,
     },
 });
 
