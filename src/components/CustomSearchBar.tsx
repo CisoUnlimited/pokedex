@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {
     Keyboard,
     StyleSheet,
@@ -10,16 +10,16 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import { Ionicons } from '@expo/vector-icons';
 
 interface CustomSearchBarProps {
-    onSearch?: (text: string) => void;
+    onSearch?: (name: string) => void;
 }
 
 const CustomSearchBar: React.FC<CustomSearchBarProps> = ({ onSearch }) => {
-    const [text, setText] = React.useState("");
+    const [text, setText] = useState("");
 
     const handleSearch = () => {
         Keyboard.dismiss();
         if (onSearch) {
-            onSearch(text.trim());
+            onSearch(text.trim().replace(/\s+/g, '-'));
         }
     };
 

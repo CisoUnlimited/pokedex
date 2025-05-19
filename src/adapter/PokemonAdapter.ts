@@ -8,12 +8,13 @@ export class PokemonAdapter {
             pokemon: name,
         });
 
-        const rawData = await httpFetchPokemon.getPokemon();
+        const pokemon = await httpFetchPokemon.getPokemon();
 
         const dexPokemon: DexPokemon = {
-            id: rawData.id,
-            name: rawData.name,
-            types: rawData.types.map((type) => type.type.name),
+            id: pokemon.id,
+            name: pokemon.name,
+            types: pokemon.types.map((type) => type.type.name),
+            stats: pokemon.stats.map((stat) => stat.base_stat),
         };
 
         return dexPokemon;

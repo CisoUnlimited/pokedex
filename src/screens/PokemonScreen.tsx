@@ -13,6 +13,14 @@ const PokemonScreen = () => {
         setSearchPokemon(name);
     };
 
+    const formatName = (name: string) => {
+        return name
+            .replace(/-/g, ' ')
+            .split(' ')
+            .map(word => word.charAt(0).toUpperCase() + word.slice(1))
+            .join(' ');
+    };
+
     return (
         <SafeAreaView style={styles.safeArea}>
             <CustomSearchBar onSearch={handleSearch} />
@@ -21,9 +29,15 @@ const PokemonScreen = () => {
                 <ActivityIndicator size="large" color="#007AFF" />
             ) : pokemon ? (
                 <View style={styles.pokemonContainer}>
-                    <Text style={styles.name}>{pokemon.name}</Text>
+                    <Text style={styles.name}>{formatName(pokemon.name)}</Text>
                     <Text>ID: {pokemon.id}</Text>
-                    <Text>Tipo: {pokemon.types[0]} {pokemon.types[1]}</Text>
+                    <Text>TIPO: {pokemon.types[0]} {pokemon.types[1]}</Text>
+                    <Text>STATS:</Text>
+                    {['- HP', '- Ataque', '- Defensa', '- At. Esp.', '- Def. Esp.', '- Velocidad'].map((title, index) => (
+                        <Text key={index}>
+                            {title}: {pokemon.stats[index]}
+                        </Text>
+                    ))}
                 </View>
             ) : (
                 <Text>No se ha buscado ningún Pokémon</Text>
