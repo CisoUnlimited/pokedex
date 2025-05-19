@@ -6,7 +6,6 @@ import {
     View,
     TouchableOpacity,
 } from 'react-native';
-import { SafeAreaView } from 'react-native-safe-area-context';
 import { Ionicons } from '@expo/vector-icons';
 
 interface CustomSearchBarProps {
@@ -24,35 +23,29 @@ const CustomSearchBar: React.FC<CustomSearchBarProps> = ({ onSearch }) => {
     };
 
     return (
-        <SafeAreaView style={styles.container}>
-            <View style={styles.searchContainer}>
-                <TextInput
-                    style={styles.input}
-                    onChangeText={setText}
-                    value={text}
-                    placeholder="Nombre o ID del Pokémon"
-                    keyboardType="default"
-                    autoCapitalize="words"
-                    returnKeyType="search"
-                    onSubmitEditing={handleSearch}
-                />
-                <TouchableOpacity style={styles.iconButton} onPress={handleSearch} activeOpacity={0.7}>
-                    <Ionicons name="search" size={24} color="#007AFF" />
-                </TouchableOpacity>
-            </View>
-        </SafeAreaView>
+        <View style={styles.searchContainer}>
+            <TextInput
+                style={styles.input}
+                onChangeText={setText}
+                value={text}
+                placeholder="Nombre o ID del Pokémon"
+                keyboardType="default"
+                autoCapitalize="words"
+                returnKeyType="search"
+                onSubmitEditing={handleSearch}
+            />
+            <TouchableOpacity style={styles.iconButton} onPress={handleSearch} activeOpacity={0.7}>
+                <Ionicons name="search" size={24} color="#007AFF" />
+            </TouchableOpacity>
+        </View>
     );
 };
 
 const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        justifyContent: 'center',
-        padding: 16,
-    },
     searchContainer: {
         flexDirection: 'row',
-        alignItems: 'center',
+        backgroundColor: '#fff',
+        borderRadius: 8,
     },
     input: {
         flex: 1,

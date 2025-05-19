@@ -24,27 +24,28 @@ const PokemonScreen = () => {
     };
 
     return (
-        <SafeAreaView style={[styles.safeArea, { backgroundColor: theme.colors.background }]}>
-            <CustomSearchBar onSearch={handleSearch} />
-
+        <SafeAreaView style={[styles.safeArea]}>
+            <View style={[styles.searchContainer]}>
+                <CustomSearchBar onSearch={handleSearch} />
+            </View>
             {loading ? (
-                <ActivityIndicator size="large" color={theme.colors.primary} />
+                <ActivityIndicator size="large" /*color={theme.colors.primary}*/ />
             ) : pokemon ? (
-                <View style={[styles.pokemonContainer, { backgroundColor: theme.colors.cardBackground }, {borderRadius: theme.borderRadius.md}]}>
-                    <Text style={[styles.name, { color: theme.colors.text }]}>{formatName(pokemon.name)}</Text>
-                    <Text style={{ color: theme.colors.text }}>ID: {pokemon.id}</Text>
-                    <Text style={{ color: theme.colors.text }}>
+                <View style={[styles.pokemonContainer]}>
+                    <Text>{formatName(pokemon.name)}</Text>
+                    <Text>ID: {pokemon.id}</Text>
+                    <Text>
                         TIPO: {pokemon.types[0]} {pokemon.types[1]}
                     </Text>
-                    <Text style={[{ color: theme.colors.text }]}>STATS:</Text>
+                    <Text>STATS:</Text>
                     {['- HP', '- Ataque', '- Defensa', '- At. Esp.', '- Def. Esp.', '- Velocidad'].map((title, index) => (
-                        <Text key={index} style={{ color: theme.colors.text }}>
+                        <Text key={index}>
                             {title}: {pokemon.stats[index]}
                         </Text>
                     ))}
                 </View>
             ) : (
-                <Text style={{ color: theme.colors.textSecondary }}>No se ha buscado ningún Pokémon</Text>
+                <Text>No se ha buscado ningún Pokémon</Text>
             )}
         </SafeAreaView>
     );
@@ -54,13 +55,18 @@ const styles = StyleSheet.create({
     safeArea: {
         flex: 1,
         paddingHorizontal: 16,
-        alignContent: 'flex-start'
+        alignContent: 'flex-start',
+    },
+    searchContainer: {
+        flex: 0.1,
     },
     pokemonContainer: {
+        flex: 0.9,
         padding: 16,
         borderWidth: 1,
         borderColor: '#ccc',
-        marginTop: 16,
+        backgroundColor: '#FFFFFF',
+        borderRadius: 8,
     },
     name: {
         fontSize: 24,
@@ -69,5 +75,6 @@ const styles = StyleSheet.create({
 });
 
 // USAR https://v1.builderx.io para ver el diseño
+// PALETAS DE COLORES: https://coolors.co/08b2e3-57a773-f6f7eb-d64550-393e41
 
 export default PokemonScreen;
