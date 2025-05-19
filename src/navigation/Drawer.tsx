@@ -11,10 +11,10 @@ export default function MyDrawer() {
     <Drawer.Navigator
       backBehavior='history'
     >
-      <Drawer.Screen name="Home" component={PokemonScreen} />
-      <Drawer.Screen name="Moves" component={MovesScreen} />
-      <Drawer.Screen name="HM" component={HMsScreen} />
-      <Drawer.Screen name="Items" component={ItemsScreen} />
+      <Drawer.Screen name="PokéDex" component={PokemonScreen} />
+      <Drawer.Screen name="MoveDex" component={MovesScreen} />
+      <Drawer.Screen name="HMDex" component={HMsScreen} />
+      <Drawer.Screen name="ItemDex" component={ItemsScreen} />
     </Drawer.Navigator>
   );
 }

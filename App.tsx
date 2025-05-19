@@ -1,13 +1,22 @@
 import './gesture-handler';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
-import { NavigationContainer } from '@react-navigation/native';
+import { NavigationContainer, DefaultTheme } from '@react-navigation/native';
 import { StyleSheet } from 'react-native';
 import Drawer from './src/navigation/Drawer';
+
+const MyTheme = {
+  ...DefaultTheme,
+  colors: {
+    ...DefaultTheme.colors,
+    background: 'red',
+    primary: 'rgb(255, 45, 85)',
+  },
+};
 
 export default function App() {
   return (
     <SafeAreaProvider>
-      <NavigationContainer>
+      <NavigationContainer theme={MyTheme}>
         <Drawer />
       </NavigationContainer>
     </SafeAreaProvider>
