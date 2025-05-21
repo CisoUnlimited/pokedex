@@ -7,20 +7,16 @@ import {
     TouchableOpacity,
 } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
+import { usePokemonStore } from '../store/pokemonStore';
 
-interface CustomSearchBarProps {
-    onSearch?: (name: string) => void;
-}
-
-const CustomSearchBar: React.FC<CustomSearchBarProps> = ({ onSearch }) => {
+const CustomSearchBar = () => {
     const [text, setText] = useState("");
+    const { fetchPokemon } = usePokemonStore();
 
-    const handleSearch = () => {
+    const search = () => {
         Keyboard.dismiss();
-        if (onSearch) {
-            onSearch(text.trim().replace(/\s+/g, '-'));
-        }
-    };
+        fetchPokemon(text.trim().replace(/\s+/g, '-'));
+    }
 
     return (
         <View style={styles.searchContainer}>
@@ -32,9 +28,9 @@ const CustomSearchBar: React.FC<CustomSearchBarProps> = ({ onSearch }) => {
                 keyboardType="default"
                 autoCapitalize="words"
                 returnKeyType="search"
-                onSubmitEditing={handleSearch}
+                onSubmitEditing={search}
             />
-            <TouchableOpacity style={styles.iconButton} onPress={handleSearch} activeOpacity={0.7}>
+            <TouchableOpacity style={styles.iconButton} onPress={search} activeOpacity={0.7}>
                 <Ionicons name="search" size={24} color="#007AFF" />
             </TouchableOpacity>
         </View>

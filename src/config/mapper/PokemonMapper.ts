@@ -6,5 +6,7 @@ export const PokemonMapper = (item : PokemonData) : DexPokemon => {
         id: item.id,
         name: item.name,
         types: item.types.map((type) => type.type.name),
+        stats: item.stats.map((stat) => stat.base_stat),
+        image: item.sprites.front_default,
     }
 }

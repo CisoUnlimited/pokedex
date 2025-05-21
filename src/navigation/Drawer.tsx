@@ -8,9 +8,7 @@ const Drawer = createDrawerNavigator();
 
 export default function MyDrawer() {
   return (
-    <Drawer.Navigator
-      backBehavior='history'
-    >
+    <Drawer.Navigator backBehavior='history'>
       <Drawer.Screen name="PokéDex" component={PokemonScreen} />
       <Drawer.Screen name="MoveDex" component={MovesScreen} />
       <Drawer.Screen name="HMDex" component={HMsScreen} />

@@ -14,7 +14,16 @@ export class PokemonAdapter {
             id: pokemon.id,
             name: pokemon.name,
             types: pokemon.types.map((type) => type.type.name),
+            weight: pokemon.weight,
+            height: pokemon.height,
             stats: pokemon.stats.map((stat) => stat.base_stat),
+            sprites: {
+                other: {
+                    "official-artwork": {
+                        front_default: pokemon.sprites.other?.["official-artwork"]?.front_default ?? "",
+                    }
+                }
+            }
         };
 
         return dexPokemon;
