@@ -8,7 +8,7 @@ import {
 import { Card } from 'react-native-paper';
 
 import { usePokemonStore } from '../store/pokemonStore';
-import HorizontalBarGraph from '@chartiful/react-native-horizontal-bar-graph'
+import { BarGraph } from 'react-native-horizontal-bar-graphs';
 
 const PokemonDetail = () => {
 
@@ -45,26 +45,27 @@ const PokemonDetail = () => {
 
             <View style={{ flexDirection: 'row', justifyContent: 'center', gap: 8 }}>
               <Text style={{ fontSize: 20 }}>{String(pokemon.weight / 10)} KG</Text>
+              
               <Text style={{ fontSize: 20 }}>{String(pokemon.height / 10)} M</Text>
             </View>
 
-            <View>
-              <Text style={{ fontSize: 20, fontWeight: 'bold', textAlign: 'center' }}>Base stats:</Text>
-            </View>
-
-            <HorizontalBarGraph
-              data={pokemon.stats}
-              labels={['HP', 'Ataque', 'Defensa', 'At. Esp.', 'Def. Esp.', 'Velocidad']}
-              height={50}
-              width={150}
-            >
-            </HorizontalBarGraph>
-
-            {/* {['HP', 'Ataque', 'Defensa', 'At. Esp.', 'Def. Esp.', 'Velocidad'].map((title, index) => (
-              <Text key={index}>
-                {title}: {pokemon.stats[index]}
-              </Text>
-            ))} */}
+            <BarGraph
+              graphData={[
+                { value: pokemon.stats[0], label: 'PS', color: '#08B2E3' },
+                { value: pokemon.stats[1], label: 'Ataque', color: '#57A773' },
+                { value: pokemon.stats[2], label: 'Defensa', color: '#D64550' },
+                { value: pokemon.stats[3], label: 'At. Esp.', color: '#393E41' },
+                { value: pokemon.stats[4], label: 'Def. Esp.', color: '#F6F7EB' },
+                { value: pokemon.stats[5], label: 'Velocidad', color: '#08B2E3' },
+              ]}
+              title='Base stats'
+              titleStyle={{marginVertical:5}}
+              showDivider={false}
+              barHeight={23}
+              barDistance={1}
+              
+              percentPosition='none'
+            />
           </Card.Content>
         </Card>
       ) : (
