@@ -8,6 +8,7 @@ import {
 import { Card } from 'react-native-paper';
 
 import { usePokemonStore } from '../store/pokemonStore';
+import HorizontalBarGraph from '@chartiful/react-native-horizontal-bar-graph'
 
 const PokemonDetail = () => {
 
@@ -43,19 +44,27 @@ const PokemonDetail = () => {
             </View>
 
             <View style={{ flexDirection: 'row', justifyContent: 'center', gap: 8 }}>
-              <Text style={{fontSize: 20}}>{String(pokemon.weight)} KG</Text>
-              <Text style={{fontSize: 20}}>{String(pokemon.height)} M</Text>
+              <Text style={{ fontSize: 20 }}>{String(pokemon.weight / 10)} KG</Text>
+              <Text style={{ fontSize: 20 }}>{String(pokemon.height / 10)} M</Text>
             </View>
 
             <View>
               <Text style={{ fontSize: 20, fontWeight: 'bold', textAlign: 'center' }}>Base stats:</Text>
             </View>
 
-            {['- HP', '- Ataque', '- Defensa', '- At. Esp.', '- Def. Esp.', '- Velocidad'].map((title, index) => (
+            <HorizontalBarGraph
+              data={pokemon.stats}
+              labels={['HP', 'Ataque', 'Defensa', 'At. Esp.', 'Def. Esp.', 'Velocidad']}
+              height={50}
+              width={150}
+            >
+            </HorizontalBarGraph>
+
+            {/* {['HP', 'Ataque', 'Defensa', 'At. Esp.', 'Def. Esp.', 'Velocidad'].map((title, index) => (
               <Text key={index}>
                 {title}: {pokemon.stats[index]}
               </Text>
-            ))}
+            ))} */}
           </Card.Content>
         </Card>
       ) : (
